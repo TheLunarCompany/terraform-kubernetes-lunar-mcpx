@@ -138,8 +138,8 @@ variable "docker_in_docker_enabled" {
   default     = false
 }
 
-variable "mcp_config" {
-  description = "MCP configuration"
+variable "mcp_target_servers_config" {
+  description = "MCP configuration. Contents of this variable will be used to create 'mcp.json' configuration"
   type        = any
   default = {
     mcpServers = {
@@ -152,7 +152,7 @@ variable "mcp_config" {
 }
 
 variable "app_config" {
-  description = "App configuration"
+  description = "App configuration. Contents of this variable will be used to create 'app.yaml' configuration"
   type        = any
   default = {
     auth = {

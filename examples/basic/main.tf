@@ -9,7 +9,7 @@ module "lunar_mcpx" {
 
   namespace = kubernetes_namespace.lunar_mcpx.id
 
-  mcp_config = {
+  mcp_target_servers_config = {
     mcpServers = {
       time = {
         command = "uvx"
