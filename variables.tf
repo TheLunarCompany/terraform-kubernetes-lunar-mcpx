@@ -138,32 +138,33 @@ variable "docker_in_docker_enabled" {
   default     = false
 }
 
-variable "mcp_json_config" {
-  description = "MCP JSON configuration"
-  type        = string
-  default     = <<-EOT
-{
-  "mcpServers": {
-    "time": {
-      "command": "uvx",
-      "args": ["mcp-server-time", "--local-timezone=America/New_York"]
+variable "mcp_config" {
+  description = "MCP configuration"
+  type        = any
+  default = {
+    mcpServers = {
+      time = {
+        command = "uvx"
+        args    = ["mcp-server-time", "--local-timezone=America/New_York"]
+      }
     }
   }
 }
-EOT
-}
 
-variable "app_yaml_config" {
-  description = "App YAML configuration"
-  type        = string
-  default     = <<-EOT
-auth:
-  enabled: false
-permissions:
-  base: "allow"
-toolExtensions:
-  services: {}
-EOT
+variable "app_config" {
+  description = "App configuration"
+  type        = any
+  default = {
+    auth = {
+      enabled = false
+    }
+    permissions = {
+      base = "allow"
+    }
+    toolExtensions = {
+      services = {}
+    }
+  }
 }
 
 variable "secret_ref" {
