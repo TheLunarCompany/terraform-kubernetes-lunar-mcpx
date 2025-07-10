@@ -32,7 +32,7 @@ This Terraform module deploys the Lunar MCPX application onto a Kubernetes clust
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| app_yaml_config | App YAML configuration | `string` | `"auth:\n  enabled: false\npermissions:\n  base: \"allow\"\ntoolExtensions:\n  services: {}\n"` | no |
+| app_config | App configuration. Contents of this variable will be used to create 'app.yaml' configuration | `any` | <pre>{<br>  "auth": {<br>    "enabled": false<br>  },<br>  "permissions": {<br>    "base": "allow"<br>  },<br>  "toolExtensions": {<br>    "services": {}<br>  }<br>}</pre> | no |
 | control_plane | Control plane configuration | <pre>object({<br>    host = string<br>    streaming = object({<br>      enabled = bool<br>    })<br>    rest = object({<br>      enabled = bool<br>    })<br>  })</pre> | <pre>{<br>  "host": "",<br>  "rest": {<br>    "enabled": false<br>  },<br>  "streaming": {<br>    "enabled": false<br>  }<br>}</pre> | no |
 | docker_in_docker_enabled | Enable Docker-in-Docker | `bool` | `false` | no |
 | healthcheck_path | Health check path | `string` | `"/healthcheck"` | no |
@@ -41,7 +41,7 @@ This Terraform module deploys the Lunar MCPX application onto a Kubernetes clust
 | image_tag | Container image tag | `string` | `"0.1.6"` | no |
 | liveness_probe | Liveness probe configuration | <pre>object({<br>    enabled               = bool<br>    initial_delay_seconds = number<br>    period_seconds        = number<br>    timeout_seconds       = number<br>    failure_threshold     = number<br>  })</pre> | <pre>{<br>  "enabled": true,<br>  "failure_threshold": 3,<br>  "initial_delay_seconds": 10,<br>  "period_seconds": 10,<br>  "timeout_seconds": 1<br>}</pre> | no |
 | log_level | Log level | `string` | `"info"` | no |
-| mcp_json_config | MCP JSON configuration | `string` | `"{\n  \"mcpServers\": {\n    \"time\": {\n      \"command\": \"uvx\",\n      \"args\": [\"mcp-server-time\", \"--local-timezone=America/New_York\"]\n    }\n  }\n}\n"` | no |
+| mcp_target_servers_config | MCP configuration. Contents of this variable will be used to create 'mcp.json' configuration | `any` | <pre>{<br>  "mcpServers": {<br>    "time": {<br>      "args": [<br>        "mcp-server-time",<br>        "--local-timezone=America/New_York"<br>      ],<br>      "command": "uvx"<br>    }<br>  }<br>}</pre> | no |
 | metrics_enabled | Enable metrics collection | `bool` | `true` | no |
 | metrics_port | Metrics port | `number` | `3000` | no |
 | name | Name of the deployment | `string` | `"lunar-mcpx"` | no |

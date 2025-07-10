@@ -5,8 +5,8 @@ resource "kubernetes_config_map" "mcpx_config" {
   }
 
   data = {
-    "mcp.json" = var.mcp_json_config
-    "app.yaml" = var.app_yaml_config
+    "mcp.json" = jsonencode(var.mcp_target_servers_config)
+    "app.yaml" = yamlencode(var.app_config)
   }
 }
 
